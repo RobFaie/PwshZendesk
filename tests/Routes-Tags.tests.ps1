@@ -7,7 +7,7 @@ Describe 'Tags Routes' {
 
     InModuleScope PwshZendesk {
 
-        $IsInteractive = [Environment]::GetCommandLineArgs() -join ' ' -notmatch '-NonI'
+        $IsInteractive = [Environment]::GetCommandLineArgs() -join ' ' -notmatch '-NonI|\.ps1'
 
         $context = @{
             Organization = 'company'

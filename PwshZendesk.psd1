@@ -6,12 +6,11 @@
 # Generated on: 15/9/19
 #
 @{
-
     # Script module or binary module file associated with this manifest.
     RootModule = '.\PwshZendesk.psm1'
 
     # Version number of this module.
-    ModuleVersion = '0.7.6'
+    ModuleVersion = '0.7.7'
 
     # Supported PSEditions
     CompatiblePSEditions = @(
@@ -23,13 +22,13 @@
     GUID = 'fd14fe05-21fb-4dfb-969b-7012632b461e'
 
     # Author of this module
-    Author = 'Telstra Purple DevSecOps'
+    Author = 'Robert McLeod'
 
     # Company or vendor of this module
-    CompanyName = 'Telstra Purple Pty Ltd'
+    CompanyName = 'Insprear'
 
     # Copyright statement for this module
-    Copyright = '(c) 2019 Telstra Purple Pty Ltd. All rights reserved.'
+    Copyright = '(c) 2019 Telstra Purple Pty. Ltd. (c) 2022 Robert W. McLeod'
 
     # Description of the functionality provided by this module
     Description = 'Wrapper for the Zendesk Rest API'
@@ -190,10 +189,10 @@
             )
 
             # A URL to the license for this module.
-            # LicenseUri = ''
+            LicenseUri = 'https://github.com/RobFaie/PwshZendesk/blob/main/LICENSE'
 
             # A URL to the main website for this project.
-            ProjectUri = 'https://github.com/Readify/PwshZendesk'
+            ProjectUri = 'https://github.com/RobFaie/PwshZendesk'
 
             # A URL to an icon representing this module.
             # IconUri = ''
@@ -219,6 +218,4 @@
 
     # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
     DefaultCommandPrefix = 'Zendesk'
-
 }
-

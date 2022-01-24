@@ -1,0 +1,212 @@
+name: Main
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+concurrency: 
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PESTER_VERSION: '4.10.1'
+  PSSA_VERSION: '1.19.1'
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  prep:
+    runs-on: 'ubuntu-20.04'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: |
+            .modules
+          key: ${{ env.PSSA_VERSION }}-${{ env.PESTER_VERSION }}
+
+      - name: Install Modules
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          $modules = '[
+            { "Name": "PSScriptAnalyzer", "Version": "${{ env.PSSA_VERSION }}" },
+            { "Name": "Pester",           "Version": "${{ env.PESTER_VERSION }}" }
+          ]' | ConvertFrom-Json
+
+          $modPath = '.modules'
+          if (-not (Test-Path -Path $modPath)) {
+            $null = New-Item -Path $modPath -ItemType Director
+          }
+
+          foreach ($module in $modules) {
+            $null = Save-Module -Name $module.Name -RequiredVersion $module.Version -Repository 'PSGallery' -Path $modPath -Confirm:$false -ErrorAction 'Stop'
+          }
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: PwshZendesk
+          path: '**/*'
+
+  # test:
+  #   needs: prep
+  #   runs-on: ${{ matrix.os }}
+  #   strategy:
+  #     matrix:
+  #       os: [ macos-11, ubuntu-20.04, windows-2019, windows-2022 ]
+
+  #   steps:
+  #     - name: Download Artifacts
+  #       uses: actions/download-artifact@v2
+
+  #     - name: PSScriptAnalyzer
+  #       run: |
+  #         $pssa = Import-Module -Name "$pwd/PwshZendesk/.modules/PSScriptAnalyzer/${{ env.PSSA_VERSION }}/PSScriptAnalyzer.psd1" -Passthru
+  #         Get-ChildItem -Directory | Invoke-ScriptAnalyzer | Format-Table -AutoSize
+
+  #     - name: Pester summary
+  #       id: pester
+  #       run: |
+  #         $pester = Import-Module -Name "$pwd/PwshZendesk/.modules/Pester/${{ env.PESTER_VERSION }}/Pester.psd1" -PassThru
+  #         Invoke-Pester -EnableExit -Show Fails
+
+  #     - name: Pester - Windows Powershell
+  #       if: runner.os == 'Windows'
+  #       shell: powershell
+  #       run: |
+  #         $pssa = Import-Module -Name "$pwd/PwshZendesk/.modules/PSScriptAnalyzer/${{ env.PSSA_VERSION }}/PSScriptAnalyzer.psd1" -Passthru
+  #         Get-ChildItem -Directory | Invoke-ScriptAnalyzer | Format-Table -AutoSize
+
+  #     - name: Pester - Windows Powershell
+  #       if: runner.os == 'Windows'
+  #       shell: powershell
+  #       run: |
+  #         $pester = Import-Module -Name "$pwd/PwshZendesk/.modules/Pester/${{ env.PESTER_VERSION }}/Pester.psd1" -PassThru
+  #         Invoke-Pester -EnableExit -Show Summary
+  
+  release:
+    needs: prep
+    runs-on: 'ubuntu-20.04'
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.7
+        with:
+          versionSpec: '5.x'
+
+      - name: GitVersion
+        uses: gittools/actions/gitversion/execute@v0.9.7
+        id: gitversion
+        with:
+          useConfigFile: true
+
+      - name: Update Module Manifest
+        run: |
+            $manifest = Get-Content -Path ./PwshZendesk.psd1
+            $manifest = $manifest | ForEach-Object {
+                $_ -replace "(?<=ModuleVersion\s+=\s+('|`"))[^'`"]+(?=('|`"))", '${{ steps.gitversion.outputs.semVer }}'
+            }
+            $manifest | Set-Content -Path ./PwshZendesk.psd1
+
+      - name: Commit updated Module Manifest
+        run: |
+            git add ./PwshZendesk.psd1
+            git config user.email "bot@rob-mc.cloud"
+            git config user.name "Rob McBot"
+            git commit --amend --no-edit
+            git push --force
+            git tag ${{ steps.gitversion.outputs.semVer }}
+            git push --tags --force
+
+      - run: zip -r PwshZendesk.zip . -x .\*/\* -x .\*
+        shell: bash
+
+      # - name: Create Release
+      #   uses: actions/create-release@v1
+      #   id: create_release
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: ${{ steps.gitversion.outputs.semVer }}
+      #     release_name: Release ${{ steps.gitversion.outputs.semVer }}
+      #     draft: false
+      #     prerelease: false
+
+      # - name: Upload Release Asset
+      #   id: upload-release-asset 
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: PwshZendesk.zip
+      #     asset_name: PwshZendesk.zip
+      #     asset_content_type: application/zip
+
+      - name: Versions
+        run: |
+          $PSVersionTable | ConvertTo-Json | ConvertFrom-Json | Format-List
+          Get-PackageProvider | Format-List Name, Version
+          Import-Module PowerShellGet -PassThru | Format-List Name, Version
+          Import-Module PackageManagement -PassThru | Format-List Name, Version
+          Install-Module PowerShellGet -AllowPrerelease -Confirm:$false -Force -PassThru | Format-List Name, Version
+          dotnet nuget --version
+
+      - name: Publish to Github Nuget Feed
+        run: |
+          Import-Module PowerShellGet -PassThru | Format-List Name, Version
+
+          Register-PSResourceRepository -Name 'Github' -URL 'https://nuget.pkg.github.com/RobFaie/index.json' | Format-List
+
+          $null = dotnet nuget add source --username RobFaie --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name Github "https://nuget.pkg.github.com/RobFaie/index.json"
+
+          $Credential = [PSCredential]::new('RobFaie', ('${{ secrets.GITHUB_TOKEN }}' | ConvertTo-SecureString -AsPlainText -Force))
+
+          $DebugPreference = 'Continue'
+          $VerbosePreference = 'Continue'
+          $ProgressPreference = 'Continue'
+          $InformationPreference = 'Continue'
+
+          Publish-PSResource -Path . -Repository 'Github' -Credential $Credential -ApiKey '${{ secrets.GITHUB_TOKEN }}' -Confirm:$false -Verbose -Debug | Format-List
+
+          # $Params = @{
+          #     Name = 'github'
+          #     SourceLocation = "https://nuget.pkg.github.com/RobFaie/index.json"
+          #     PublishLocation = "https://nuget.pkg.github.com/RobFaie/index.json"
+          #     InstallationPolicy = 'Trusted'
+          # }
+
+          # $null = Register-PSRepository @Params -Verbose
+
+          # $Credential = [PSCredential]::new('RobFaie', ('${{ secrets.GITHUB_TOKEN }}' | ConvertTo-SecureString -AsPlainText -Force))
+
+          # Publish-Module -Path '.' -NuGetApiKey '${{ secrets.GITHUB_TOKEN }}' -Repository 'github' -Credential $Credential -Confirm:$false -Force
+
+      # - name: Publish to Test Gallery
+      #   run: |
+      #     Import-Module -Name PowerShellGet -Passthru | Format-List Name, Version
+      #     Import-Module -Name PackageManagement -Passthru | Format-List Name, Version
+
+      #     $registerParams = @{
+      #       Name            = 'Posh Test Gallery'
+      #       SourceLocation  = 'https://www.poshtestgallery.com/api/v2'
+      #       PublishLocation = 'https://www.poshtestgallery.com/api/v2/package/'
+      #     }
+      #     Register-PSRepository @registerParams
+
+      #     Publish-Module -Path '.' -Repository 'Posh Test Gallery' -NuGetApiKey '${{ secrets.POSH_TEST_GALLERY_NUGET_KEY }}'

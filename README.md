@@ -1,6 +1,6 @@
 # PwshZendesk
 
-![Build Status]
+[![Main Badge Image]][Main Badge Link]
 
 PwshZendesk is a Zendesk Support API client for Powershell.
 PwshZendesk supports Powershell versions 5.1, 6, and 7 on all platforms.
@@ -58,7 +58,7 @@ PwshZendesk uses Style and Best Practice testing provided by [PSScriptAnalyzer] 
 Ensure you have [PSScriptAnalyzer] installed:
 
 ```Powershell
-Install-Module -Name 'PSScriptAnalyzer'
+Install-Module -Name 'PSScriptAnalyzer' -RequiredVersion '1.19.1'
 ```
 
 And just run it over the `functions`, `internal`, and `tests` directories. The `PSScriptAnalyzerSettings.psd1` will get picked up and run all configured tests.
@@ -73,7 +73,7 @@ Get-ChildItem -Directory | Invoke-ScriptAnalyzer | Format-Table -AutoSize
 Ensure you have [Pester] installed:
 
 ```Powershell
-Install-Module -Name 'Pester'
+Install-Module -Name 'Pester' -RequiredVersion '4.10.1'
 ```
 
 And just run it from the project root in a non-interactive session.
@@ -134,4 +134,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [httpstat.us]: https://httpstat.us
 [SemVer]: http://semver.org/
 
-[Build Status]: https://dev.azure.com/readify/Technology/_apis/build/status/Readify.PwshZendesk?branchName=master
+[Main Badge Link]: https://github.com/RobFaie/PwshZendesk/actions/workflows/main.yml
+[Main Badge Image]: https://github.com/RobFaie/PwshZendesk/actions/workflows/main.yml/badge.svg
