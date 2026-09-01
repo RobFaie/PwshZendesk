@@ -14,38 +14,52 @@ function Get-Connection {
     [CMDletBinding()]
     Param (
         # Zendesk subdomain
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
         [String]
         $Organization,
 
         # Email address of user to log in
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory, ParameterSetName='ApiKey')]
         [ValidateNotNullOrEmpty()]
         [String]
         $Username,
 
         # Zendesk API token retrieved from https://<organization>.zendesk.com/agent/admin/api/settings
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory, ParameterSetName='ApiKey')]
         [Alias('ApiKey')]
         [ValidateNotNullOrEmpty()]
         [SecureString]
-        $ApiToken
+        $ApiToken,
+
+        [Parameter(Mandatory, ParameterSetName='ClientCreds')]
+        [ValidateNotNullOrEmpty()]
+        [PSCredential]
+        $ClientCredential
     )
 
-    $context = [PSCustomObject]@{
-        Organization = $Organization
-        BaseUrl      = "https://$Organization.zendesk.com"
-        Credential   = [System.Management.Automation.PSCredential]::New("$Username/token", $ApiToken)
-        User         = $null
+    $context = [ordered]@{
+        Organization   = $Organization
+        BaseUrl        = "https://$Organization.zendesk.com"
+        AuthType       = $null
+        AccessToken    = $null
+        TokenExpiresAt = [DateTime]::UTCNow
+        User           = $null
     }
 
+    switch ($PSCmdlet.ParameterSetName) {
+        'ApiKey' {
+            $context['AuthType'] = 'ApiKey'
+            $context['ApiCredential'] = [System.Management.Automation.PSCredential]::New("$Username/token", $ApiToken)
+        }
+        'ClientCreds' {
+            $context['AuthType'] = 'ClientCreds'
+            $context['ClientCredential'] = $ClientCredential
+        }
+    }
+
+    $context = [PSCustomObject]$context
     $context | Add-Member -TypeName 'ZendeskContext'
-
-    if (-not (Test-Connection -context $context)) {
-        throw $Script:InvalidConnection
-    }
-
     $context
 
 }

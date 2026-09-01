@@ -11,7 +11,7 @@ function Connect- {
         Connects to the 'company' Zendesk instance as the user 'name@company.net'
     #>
     [OutputType([Boolean])]
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName='ClientCreds')]
     Param (
         # Zendesk subdomain
         [Parameter(Mandatory = $true)]
@@ -20,20 +20,29 @@ function Connect- {
         $Organization,
 
         # Email address of user to log in
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory, ParameterSetName='ApiKey')]
         [ValidateNotNullOrEmpty()]
         [String]
         $Username,
 
         # Zendesk API token retrieved from https://<organization>.zendesk.com/agent/admin/api/settings
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory, ParameterSetName='ApiKey')]
         [Alias('ApiKey')]
         [ValidateNotNullOrEmpty()]
         [SecureString]
-        $ApiToken
+        $ApiToken,
+
+        [Parameter(Mandatory, ParameterSetName='ClientCreds')]
+        [ValidateNotNullOrEmpty()]
+        [PSCredential]
+        $ClientCredential
     )
 
     $Script:Context = Get-Connection @PSBoundParameters
+
+    if (-not (Test-Connection -Context $Script:Context)) {
+        throw $Script:InvalidConnection
+    }
 
     $true
 

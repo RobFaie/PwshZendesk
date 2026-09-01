@@ -28,7 +28,7 @@
     CompanyName = 'Insprear'
 
     # Copyright statement for this module
-    Copyright = '(c) 2019 Telstra Purple Pty. Ltd. (c) 2022 Robert W. McLeod'
+    Copyright = '(c) 2019 Versent Group Pty. Ltd. (c) 2026 Robert W. McLeod'
 
     # Description of the functionality provided by this module
     Description = 'Wrapper for the Zendesk Rest API'
