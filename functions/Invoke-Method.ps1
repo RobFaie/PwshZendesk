@@ -149,17 +149,38 @@ function Invoke-Method {
         }
     }
 
-    if ($PSVersionTable.PSEdition -eq 'Core') {
-        # PS Core added native Basic Auth support
-        $params.Credential = $Context.Credential
-        $params.Authentication = 'Basic'
-    } else {
-        # PS Desktop requires manual header creation. Basic auth is only supported by challenge.
-        $raw = '{0}:{1}' -f $Context.Credential.GetNetworkCredential().username, $Context.Credential.GetNetworkCredential().password
-        $bytes = [System.Text.Encoding]::ASCII.GetBytes($raw)
-        $encoded = [Convert]::ToBase64String($bytes)
+    switch ($Context.AuthType) {
+        'ApiKey' {
+            if ($PSVersionTable.PSEdition -eq 'Core') {
+                # PS Core added native Basic Auth support
+                $params.Credential = $Context.Credential
+                $params.Authentication = 'Basic'
+            } else {
+                # PS Desktop requires manual header creation. Basic auth is only supported by challenge.
+                $raw = '{0}:{1}' -f $Context.Credential.GetNetworkCredential().username, $Context.Credential.GetNetworkCredential().password
+                $bytes = [System.Text.Encoding]::ASCII.GetBytes($raw)
+                $encoded = [Convert]::ToBase64String($bytes)
 
-        $params.Headers.Authorization = "Basic $encoded"
+                $params.Headers.Authorization = "Basic $encoded"
+            }
+        }
+
+        'ClientCreds' {
+            if ($null -eq $Context.AccessToken -or $Context.TokenExpiresAt -le [DateTime]::UtcNow) {
+                $null = Request-AccessToken -Context $context
+            }
+
+            if ($PSVersionTable.PSEdition -eq 'Core') {
+                $params.Token = $Context.AccessToken
+                $params.Authentication = 'Bearer'
+            } else {
+                $params.Headers.Authorization = 'Bearer {0}' -f ($Context.AccessToken | ConvertFrom-SecureString -AsPlainText)
+            }
+        }
+
+        default {
+            throw 'Unknown Auth Type'
+        }
     }
 
     if ($PSBoundParameters.ContainsKey('Body')) {

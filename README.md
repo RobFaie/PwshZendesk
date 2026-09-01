@@ -123,9 +123,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Billie Thompson** - *README.md template* - [PurpleBooth](https://github.com/PurpleBooth)
 
 
-[tags on this repository]: https://github.com/Readify/PwshZendesk/tags
+[tags on this repository]: https://github.com/RobFaie/PwshZendesk/tags
 [CONTRIBUTING.md]: https://gist.github.com/PurpleBooth/b24679402957c63ec426
-[contributors]: https://github.com/Readify/PwshZendesk/contributors
+[contributors]: https://github.com/RobFaie/PwshZendesk/contributors
 
 [PowerShell Gallery]: https://www.powershellgallery.com/packages/PwshZendesk
 [PSScriptAnalyzer]: https://github.com/PowerShell/PSScriptAnalyzer
