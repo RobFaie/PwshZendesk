@@ -1,2 +1,1 @@
-mode: Mainline
-no-bump-message: '\[skip ci\]|\+semver:\s?(none|skip)'
+workflow: GitHubFlow/v1
