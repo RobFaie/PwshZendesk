@@ -24,10 +24,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
 
       - name: Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         id: cache
         with:
           path: |
@@ -52,46 +52,46 @@ jobs:
           }
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v7
         with:
           name: PwshZendesk
           path: '**/*'
 
-  # test:
-  #   needs: prep
-  #   runs-on: ${{ matrix.os }}
-  #   strategy:
-  #     matrix:
-  #       os: [ macos-11, ubuntu-24.04, windows-2019, windows-2022 ]
+  test:
+    needs: prep
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-11, ubuntu-24.04, windows-2019, windows-2022 ]
 
-  #   steps:
-  #     - name: Download Artifacts
-  #       uses: actions/download-artifact@v2
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v7
 
-  #     - name: PSScriptAnalyzer
-  #       run: |
-  #         $pssa = Import-Module -Name "$pwd/PwshZendesk/.modules/PSScriptAnalyzer/${{ env.PSSA_VERSION }}/PSScriptAnalyzer.psd1" -Passthru
-  #         Get-ChildItem -Directory | Invoke-ScriptAnalyzer | Format-Table -AutoSize
+      - name: PSScriptAnalyzer
+        run: |
+          $pssa = Import-Module -Name "$pwd/.modules/PSScriptAnalyzer/${{ env.PSSA_VERSION }}/PSScriptAnalyzer.psd1" -Passthru
+          Get-ChildItem -Directory | Invoke-ScriptAnalyzer | Format-Table -AutoSize
 
-  #     - name: Pester summary
-  #       id: pester
-  #       run: |
-  #         $pester = Import-Module -Name "$pwd/PwshZendesk/.modules/Pester/${{ env.PESTER_VERSION }}/Pester.psd1" -PassThru
-  #         Invoke-Pester -EnableExit -Show Fails
+      - name: Pester summary
+        id: pester
+        run: |
+          $pester = Import-Module -Name "$pwd/.modules/Pester/${{ env.PESTER_VERSION }}/Pester.psd1" -PassThru
+          Invoke-Pester -EnableExit -Show Fails
 
-  #     - name: Pester - Windows Powershell
-  #       if: runner.os == 'Windows'
-  #       shell: powershell
-  #       run: |
-  #         $pssa = Import-Module -Name "$pwd/PwshZendesk/.modules/PSScriptAnalyzer/${{ env.PSSA_VERSION }}/PSScriptAnalyzer.psd1" -Passthru
-  #         Get-ChildItem -Directory | Invoke-ScriptAnalyzer | Format-Table -AutoSize
+      - name: Pester - Windows Powershell
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          $pssa = Import-Module -Name "$pwd/.modules/PSScriptAnalyzer/${{ env.PSSA_VERSION }}/PSScriptAnalyzer.psd1" -Passthru
+          Get-ChildItem -Directory | Invoke-ScriptAnalyzer | Format-Table -AutoSize
 
-  #     - name: Pester - Windows Powershell
-  #       if: runner.os == 'Windows'
-  #       shell: powershell
-  #       run: |
-  #         $pester = Import-Module -Name "$pwd/PwshZendesk/.modules/Pester/${{ env.PESTER_VERSION }}/Pester.psd1" -PassThru
-  #         Invoke-Pester -EnableExit -Show Summary
+      - name: Pester - Windows Powershell
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          $pester = Import-Module -Name "$pwd/.modules/Pester/${{ env.PESTER_VERSION }}/Pester.psd1" -PassThru
+          Invoke-Pester -EnableExit -Show Summary
   
   release:
     needs: prep
@@ -100,26 +100,24 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9.7
+        uses: gittools/actions/gitversion/setup@v4.7.0
         with:
-          versionSpec: '5.x'
+          versionSpec: '6.x'
 
       - name: GitVersion
-        uses: gittools/actions/gitversion/execute@v0.9.7
+        uses: gittools/actions/gitversion/execute@v4.7.0
         id: gitversion
-        with:
-          useConfigFile: true
 
       - name: Update Module Manifest
         run: |
             $manifest = Get-Content -Path ./PwshZendesk.psd1
             $manifest = $manifest | ForEach-Object {
-                $_ -replace "(?<=ModuleVersion\s+=\s+('|`"))[^'`"]+(?=('|`"))", '${{ steps.gitversion.outputs.semVer }}'
+                $_ -replace "(?<=ModuleVersion\s+=\s+('|`"))[^'`"]+(?=('|`"))", '${{ steps.gitversion.outputs.MajorMinorPatch }}'
             }
             $manifest | Set-Content -Path ./PwshZendesk.psd1
 
@@ -130,7 +128,7 @@ jobs:
             git config user.name "Rob McBot"
             git commit --amend --no-edit
             git push --force
-            git tag ${{ steps.gitversion.outputs.semVer }}
+            git tag ${{ steps.gitversion.outputs.MajorMinorPatch }}
             git push --tags --force
 
       - run: zip -r PwshZendesk.zip . -x .\*/\* -x .\*
