@@ -24,10 +24,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
 
       - name: Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v5
         id: cache
         with:
           path: |
@@ -52,7 +52,7 @@ jobs:
           }
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v7
         with:
           name: PwshZendesk
           path: '**/*'
@@ -100,26 +100,24 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9.7
+        uses: gittools/actions/gitversion/setup@v4.7.0
         with:
-          versionSpec: '5.x'
+          versionSpec: '6.x'
 
       - name: GitVersion
-        uses: gittools/actions/gitversion/execute@v0.9.7
+        uses: gittools/actions/gitversion/execute@v4.7.0
         id: gitversion
-        with:
-          useConfigFile: true
 
       - name: Update Module Manifest
         run: |
             $manifest = Get-Content -Path ./PwshZendesk.psd1
             $manifest = $manifest | ForEach-Object {
-                $_ -replace "(?<=ModuleVersion\s+=\s+('|`"))[^'`"]+(?=('|`"))", '${{ steps.gitversion.outputs.semVer }}'
+                $_ -replace "(?<=ModuleVersion\s+=\s+('|`"))[^'`"]+(?=('|`"))", '${{ steps.gitversion.outputs.MajorMinorPatch }}'
             }
             $manifest | Set-Content -Path ./PwshZendesk.psd1
 
