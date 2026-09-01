@@ -1,5 +1,5 @@
-[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingConvertToSecureStringWithPlainText', '')]
-Param()
+﻿[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingConvertToSecureStringWithPlainText', '')]
+param()
 
 Import-Module "$PSScriptRoot/../PwshZendesk.psm1" -Force
 
@@ -12,6 +12,7 @@ Describe 'Job Status Routes' {
         $context = @{
             Organization = 'company'
             BaseUrl      = 'https://company.testdesk.com'
+            AuthType     = 'ApiKey'
             Credential   = [System.Management.Automation.PSCredential]::New('email', ('api-key' | ConvertTo-SecureString -AsPlainText -Force))
             User         = [PSCustomObject]@{ role = '' }
         }

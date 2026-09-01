@@ -1,4 +1,4 @@
-
+﻿
 function Get-TicketRelated {
     <#
     .SYNOPSIS
@@ -16,7 +16,7 @@ function Get-TicketRelated {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Unique Id of the ticket to get related information for
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

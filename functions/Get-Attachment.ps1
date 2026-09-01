@@ -1,4 +1,4 @@
-
+﻿
 function Get-Attachment {
     <#
     .SYNOPSIS
@@ -18,7 +18,7 @@ function Get-Attachment {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding()]
-    Param (
+    param (
         # Unique Id of the attachment to retrieve
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

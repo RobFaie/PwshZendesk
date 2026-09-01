@@ -1,4 +1,4 @@
-
+﻿
 function Get-AuthenticatedUser {
     <#
     .SYNOPSIS
@@ -16,7 +16,7 @@ function Get-AuthenticatedUser {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Zendesk Connection Context from `Get-ZendeskConnection`
         [Parameter(Mandatory = $false)]
         [PSTypeName('ZendeskContext')]

@@ -84,7 +84,7 @@ Tests that require a non-interactive session that are run interactively will aut
 pwsh -NonInteractive -Command 'Invoke-Pester'
 ```
 
-If you wish to skip tests that require an internet connection then you can run the following. The tests for the `Invoke-Method` function make use of calls to [httpstat.us] to test behavior when hitting api limits, and other http status code scenarios.
+If you wish to skip tests that require an internet connection then you can run the following. The tests for the `Invoke-Method` function make use of calls to [codes.httpauth.dev] to test behavior when hitting api limits, and other http status code scenarios.
 
 ```Powershell
 pwsh -NonInteractive -Command 'Invoke-Pester -ExcludeTag internet'
@@ -94,7 +94,7 @@ pwsh -NonInteractive -Command 'Invoke-Pester -ExcludeTag internet'
 
 - [PSScriptAnalyzer] - Code Style and Best Practice testing
 - [Pester] - Testing framework
-- [httpstat.us] - Used to test getting different HTTP status codes back from the API
+- [codes.httpauth.dev] - Used to test getting different HTTP status codes back from the API
 - [GitVersion] - Used to calculate version.
 
 ## Contributing
@@ -131,7 +131,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [PSScriptAnalyzer]: https://github.com/PowerShell/PSScriptAnalyzer
 [Pester]: https://github.com/pester/Pester
 [GitVersion]: https://github.com/GitTools/GitVersion
-[httpstat.us]: https://httpstat.us
+[codes.httpauth.dev]: https://codes.httpauth.dev
 [SemVer]: http://semver.org/
 
 [Main Badge Link]: https://github.com/RobFaie/PwshZendesk/actions/workflows/main.yml

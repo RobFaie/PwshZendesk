@@ -1,4 +1,4 @@
-
+﻿
 function Set-GroupMembershipAsDefault {
     <#
     .SYNOPSIS
@@ -12,7 +12,7 @@ function Set-GroupMembershipAsDefault {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of User to set default group membership for
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

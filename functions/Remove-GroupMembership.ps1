@@ -1,4 +1,4 @@
-
+﻿
 function Remove-GroupMembership {
     <#
     .SYNOPSIS
@@ -20,7 +20,7 @@ function Remove-GroupMembership {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High', DefaultParameterSetName = 'default')]
-    Param (
+    param (
         # Unique Id of group membership to remove
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

@@ -1,4 +1,4 @@
-
+﻿
 function Remove-UserIdentity {
     <#
     .SYNOPSIS
@@ -16,7 +16,7 @@ function Remove-UserIdentity {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of the user identity to delete
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

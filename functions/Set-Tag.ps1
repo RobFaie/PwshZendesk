@@ -20,7 +20,7 @@ function Set-Tag {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding(DefaultParameterSetName = 'Default', SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of ticket to set tags for
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Ticket')]

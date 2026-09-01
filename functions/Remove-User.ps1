@@ -1,4 +1,4 @@
-
+﻿
 function Remove-User {
     <#
     .SYNOPSIS
@@ -24,7 +24,7 @@ function Remove-User {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High', DefaultParameterSetName = 'Id')]
-    Param (
+    param (
         # Unique Id of the user to delete
         [Parameter(Mandatory = $true, ParameterSetName = 'Id')]
         [ValidateRange(1, [Int64]::MaxValue)]

@@ -1,4 +1,4 @@
-function Get-SatisfactionRating {
+﻿function Get-SatisfactionRating {
     <#
     .SYNOPSIS
         Retrieves Satisfaction Ratings
@@ -36,7 +36,7 @@ function Get-SatisfactionRating {
         If you specify an unqualified score such as good, the results include all the records with and without comments.
     #>
     [CmdletBinding(DefaultParameterSetName = 'Filter')]
-    Param (
+    param (
         # Unique Id of the satisfaction rating to retrieve
         [Parameter(Mandatory = $false,
             ParameterSetName = 'Id')]

@@ -1,4 +1,4 @@
-
+﻿
 function Get-SuspendedTicket {
     <#
     .SYNOPSIS
@@ -20,7 +20,7 @@ function Get-SuspendedTicket {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Unique Id of the suspended ticket to retrieve
         [Parameter(Mandatory = $false)]
         [ValidateRange(1, [Int64]::MaxValue)]

@@ -1,4 +1,4 @@
-function Test-IsEndUser {
+﻿function Test-IsEndUser {
     <#
     .SYNOPSIS
         Tests if the current user is an end user.
@@ -10,7 +10,7 @@ function Test-IsEndUser {
         Returns `$true` if the current user is an end user or `$false` otherwise.
     #>
     [CmdletBinding()]
-    Param (
+    param (
         # Zendesk Connection Context from `Get-ZendeskConnection`
         [Parameter(Mandatory = $false)]
         [PSTypeName('ZendeskContext')]

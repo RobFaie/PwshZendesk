@@ -12,7 +12,7 @@ function Hide-Comment {
     #>
     [OutputType([String])]
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of the comment to hide
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

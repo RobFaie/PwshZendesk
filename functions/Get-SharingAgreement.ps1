@@ -1,4 +1,4 @@
-function Get-SharingAgreement {
+﻿function Get-SharingAgreement {
     <#
     .SYNOPSIS
         Returns a sharing agreement for your account.
@@ -15,7 +15,7 @@ function Get-SharingAgreement {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding(DefaultParameterSetName = 'Default')]
-    Param (
+    param (
 
         # Unique Id of the sharing agreement to retrieve
         [Parameter(Mandatory = $false)]

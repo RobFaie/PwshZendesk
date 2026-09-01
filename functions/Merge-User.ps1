@@ -1,4 +1,4 @@
-
+﻿
 function Merge-User {
     <#
     .SYNOPSIS
@@ -16,7 +16,7 @@ function Merge-User {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of the user to merge
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

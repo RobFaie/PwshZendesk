@@ -1,4 +1,4 @@
-
+﻿
 function Get-UserRelated {
     <#
     .SYNOPSIS
@@ -16,7 +16,7 @@ function Get-UserRelated {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Unique Id of the user to get related information for
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

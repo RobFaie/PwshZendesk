@@ -1,4 +1,4 @@
-function Test-IsAdmin {
+﻿function Test-IsAdmin {
     <#
     .SYNOPSIS
         Tests if the current user is an admin.
@@ -10,7 +10,7 @@ function Test-IsAdmin {
         Returns `$true` if the current user is an admin or `$false` otherwise.
     #>
     [CmdletBinding()]
-    Param (
+    param (
         # Zendesk Connection Context from `Get-ZendeskConnection`
         [Parameter(Mandatory = $false)]
         [PSTypeName('ZendeskContext')]

@@ -1,4 +1,4 @@
-
+﻿
 function New-Ticket {
     <#
     .SYNOPSIS
@@ -20,7 +20,7 @@ function New-Ticket {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # The subject of the ticket
         [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]

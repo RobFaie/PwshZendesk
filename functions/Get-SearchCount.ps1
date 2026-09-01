@@ -1,4 +1,4 @@
-
+﻿
 function Get-SearchCount {
     <#
     .SYNOPSIS
@@ -16,7 +16,7 @@ function Get-SearchCount {
     #>
     [OutputType([String])]
     [CmdletBinding()]
-    Param (
+    param (
         # Zendesk Query
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]

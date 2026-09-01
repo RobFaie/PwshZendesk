@@ -1,4 +1,4 @@
-
+﻿
 function Get-DeletedUser {
     <#
     .SYNOPSIS
@@ -20,7 +20,7 @@ function Get-DeletedUser {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Unique Id of the User to retrieve
         [Parameter(Mandatory = $false)]
         [ValidateRange(1, [Int64]::MaxValue)]

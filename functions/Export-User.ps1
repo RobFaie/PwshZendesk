@@ -1,4 +1,4 @@
-
+﻿
 function Export-User {
     <#
     .SYNOPSIS
@@ -16,7 +16,7 @@ function Export-User {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Timestamp returned by the last Export or `0` for a new incremental export
         [Parameter(Mandatory = $true)]
         [ValidateRange(0, [Int64]::MaxValue)]

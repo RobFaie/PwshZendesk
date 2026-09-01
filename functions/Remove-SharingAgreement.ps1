@@ -12,7 +12,7 @@ function Remove-SharingAgreement {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of sharing agreement to delete
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

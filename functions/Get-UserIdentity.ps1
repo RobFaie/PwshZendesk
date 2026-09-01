@@ -1,4 +1,4 @@
-
+﻿
 function Get-UserIdentity {
     <#
     .SYNOPSIS
@@ -20,7 +20,7 @@ function Get-UserIdentity {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Unique Id of the user identity to retrieve
         [Parameter(Mandatory = $false)]
         [ValidateRange(1, [Int64]::MaxValue)]

@@ -1,4 +1,4 @@
-function Assert-IsAgent {
+﻿function Assert-IsAgent {
     <#
     .SYNOPSIS
         Asserts that the current user is an agent or admin.
@@ -10,7 +10,7 @@ function Assert-IsAgent {
         Raises and exception if current user is not an agent or an admin
     #>
     [CmdletBinding()]
-    Param (
+    param (
         # Zendesk Connection Context from `Get-ZendeskConnection`
         [Parameter(Mandatory = $false)]
         [PSTypeName('ZendeskContext')]

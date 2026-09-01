@@ -1,4 +1,4 @@
-
+﻿
 function Remove-Ticket {
     <#
     .SYNOPSIS
@@ -28,7 +28,7 @@ function Remove-Ticket {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of the ticket to delete
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

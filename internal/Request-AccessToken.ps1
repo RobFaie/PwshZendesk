@@ -1,4 +1,4 @@
-function Request-AccessToken {
+﻿function Request-AccessToken {
     <#
     .SYNOPSIS
         Fetches a fresh OAuth access token.
@@ -7,9 +7,9 @@ function Request-AccessToken {
 
         Fetches an oauth access token. The supplied Context is updated with the new token and expiration time.
     #>
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingConvertToSecureStringWithPlainText', '')]
     [CmdletBinding()]
-    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('AvoidUsingConvertToSecureStringWithPlainText', '')]
-    Param (
+    param (
         # Zendesk Connection Context from `Get-ZendeskConnection`
         [Parameter(Mandatory = $false)]
         [PSTypeName('ZendeskContext')]

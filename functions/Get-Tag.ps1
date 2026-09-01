@@ -32,7 +32,7 @@ function Get-Tag {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding(DefaultParameterSetName = 'Default')]
-    Param (
+    param (
         # Unique Id of the ticket to get tags for
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Ticket')]

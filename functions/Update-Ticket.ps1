@@ -1,4 +1,4 @@
-
+﻿
 function Update-Ticket {
     <#
     .SYNOPSIS
@@ -24,7 +24,7 @@ function Update-Ticket {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(DefaultParameterSetName = 'Property', SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Tickets to update
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Object')]

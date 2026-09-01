@@ -1,4 +1,4 @@
-function Get-Organization {
+﻿function Get-Organization {
     <#
     .SYNOPSIS
         Gets organizations
@@ -38,7 +38,7 @@ function Get-Organization {
         Gets all organizations with connection context from `Get-ZendeskConnection`.
     #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
-    Param (
+    param (
         # Unique Id of the group to retrieve
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Id')]

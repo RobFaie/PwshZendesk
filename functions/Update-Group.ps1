@@ -1,4 +1,4 @@
-
+﻿
 function Update-Group {
     <#
     .SYNOPSIS
@@ -16,7 +16,7 @@ function Update-Group {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of the group to update
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

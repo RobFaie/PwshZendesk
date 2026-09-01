@@ -104,7 +104,7 @@ Describe 'ConvertTo-UnicodeEscape' {
         )
 
         It 'Does not escape: <Char>' -TestCases $cases {
-            Param ($Char)
+            param ($Char)
 
             $Char | ConvertTo-UnicodeEscape | Should -Be $Char
         }
@@ -2055,7 +2055,7 @@ Describe 'ConvertTo-UnicodeEscape' {
         )
 
         It '<Char> => <Escape>' -TestCases $cases {
-            Param ($Char, $Escape)
+            param ($Char, $Escape)
 
             $Char | ConvertTo-UnicodeEscape | Should -Be $Escape
         }

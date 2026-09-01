@@ -1,4 +1,4 @@
-function ConvertTo-UnicodeEscape {
+﻿function ConvertTo-UnicodeEscape {
     <#
     .SYNOPSIS
         Escapes non-ascii characters in a given string
@@ -14,33 +14,35 @@ function ConvertTo-UnicodeEscape {
         Converts `$data` to json and escapes any non ascii characters
     #>
     [CmdletBinding()]
-    Param (
+    param (
         # String to escape
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [String]
         $InputObject
     )
 
-    $output = ''
+    process {
+        $output = ''
 
-    foreach ($char in $InputObject.GetEnumerator()) {
-        $i = [int]$char
+        foreach ($char in $InputObject.GetEnumerator()) {
+            $i = [int]$char
 
-        if ($i -lt 128) {
-            Write-Debug -Message "$char ($i) does not need escaping."
-            $output += $char
-        } else {
-            Write-Debug -Message "$char ($i) needs escaping."
+            if ($i -lt 128) {
+                Write-Debug -Message "$char ($i) does not need escaping."
+                $output += $char
+            } else {
+                Write-Debug -Message "$char ($i) needs escaping."
 
-            $hex = '{0:X}' -f $i
-            Write-Debug -Message "Character as hex: $hex"
+                $hex = '{0:X}' -f $i
+                Write-Debug -Message "Character as hex: $hex"
 
-            $escape = '\u' + $hex.PadLeft(4, '0')
-            Write-Debug -Message "Full escape sequence: $escape"
+                $escape = '\u' + $hex.PadLeft(4, '0')
+                Write-Debug -Message "Full escape sequence: $escape"
 
-            $output += $escape
+                $output += $escape
+            }
         }
-    }
 
-    $output
+        $output
+    }
 }

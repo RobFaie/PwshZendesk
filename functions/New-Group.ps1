@@ -1,4 +1,4 @@
-
+﻿
 function New-Group {
     <#
     .SYNOPSIS
@@ -16,7 +16,7 @@ function New-Group {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # The name of the group.
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]

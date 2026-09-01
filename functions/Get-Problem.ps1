@@ -1,4 +1,4 @@
-
+﻿
 function Get-Problem {
     <#
     .SYNOPSIS
@@ -20,7 +20,7 @@ function Get-Problem {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Partial subject of problem to search for.
         [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]

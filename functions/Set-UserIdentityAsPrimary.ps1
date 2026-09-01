@@ -1,4 +1,4 @@
-
+﻿
 function Set-UserIdentityAsPrimary {
     <#
     .SYNOPSIS
@@ -12,7 +12,7 @@ function Set-UserIdentityAsPrimary {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of the user identity to make primary
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

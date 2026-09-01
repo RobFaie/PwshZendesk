@@ -1,4 +1,4 @@
-
+﻿
 function Restore-SuspendedTicket {
     <#
     .SYNOPSIS
@@ -18,7 +18,7 @@ function Restore-SuspendedTicket {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of suspended ticket to restore
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

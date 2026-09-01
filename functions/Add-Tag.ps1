@@ -2,7 +2,7 @@
 function Add-Tag {
     [OutputType([PSCustomObject])]
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High', DefaultParameterSetName = 'Default')]
-    Param (
+    param (
 
         # Unique Id of ticket to add tags to
         [Parameter(Mandatory = $true,

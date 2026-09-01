@@ -1,7 +1,7 @@
-
+﻿
 function Search-User {
     [CmdletBinding()]
-    Param (
+    param (
         # Zendesk Connection Context from `Get-ZendeskConnection`
         [Parameter(Mandatory = $false)]
         [PSTypeName('ZendeskContext')]

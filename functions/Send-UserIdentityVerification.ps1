@@ -1,4 +1,4 @@
-
+﻿
 function Send-UserIdentityVerification {
     <#
     .SYNOPSIS
@@ -12,7 +12,7 @@ function Send-UserIdentityVerification {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of the user identity to verify
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

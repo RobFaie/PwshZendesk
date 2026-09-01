@@ -1,4 +1,4 @@
-
+﻿
 function Set-User {
     <#
     .SYNOPSIS
@@ -12,7 +12,7 @@ function Set-User {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High', DefaultParameterSetName = 'Default')]
-    Param (
+    param (
         # User Object to set
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Object')]

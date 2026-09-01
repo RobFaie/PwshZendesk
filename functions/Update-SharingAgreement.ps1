@@ -1,4 +1,4 @@
-function Update-SharingAgreement {
+﻿function Update-SharingAgreement {
     <#
     .SYNOPSIS
         Updates the status of a sharing agreement
@@ -14,7 +14,7 @@ function Update-SharingAgreement {
         Declines the sharing agreement with id 1.
     #>
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of the sharing agreement to update
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

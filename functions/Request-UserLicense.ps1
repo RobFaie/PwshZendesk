@@ -1,7 +1,7 @@
-
+﻿
 function Request-UserLicense {
     [CmdletBinding()]
-    Param (
+    param (
         # Zendesk Connection Context from `Get-ZendeskConnection`
         [Parameter(Mandatory = $false)]
         [PSTypeName('ZendeskContext')]

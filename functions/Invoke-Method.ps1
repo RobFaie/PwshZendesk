@@ -1,4 +1,4 @@
-
+﻿
 function Invoke-Method {
     <#
     .SYNOPSIS
@@ -50,7 +50,7 @@ function Invoke-Method {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Rest Method
         [Parameter(Mandatory = $false)]
         [ValidateSet('Delete', 'Get', 'Post', 'Put')]

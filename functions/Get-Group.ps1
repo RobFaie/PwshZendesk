@@ -34,7 +34,7 @@ function Get-Group {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding(DefaultParameterSetName = 'Default')]
-    Param (
+    param (
         # Unique Id of the group to retrieve
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Id')]

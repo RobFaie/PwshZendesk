@@ -1,4 +1,4 @@
-
+﻿
 function Set-OrganizationMembershipAsDefault {
     <#
     .SYNOPSIS
@@ -12,7 +12,7 @@ function Set-OrganizationMembershipAsDefault {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of user to set default organization for
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

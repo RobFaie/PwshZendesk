@@ -1,4 +1,4 @@
-function Assert-IsEndUser {
+﻿function Assert-IsEndUser {
     <#
     .SYNOPSIS
         Asserts that the current user is an end user.
@@ -10,7 +10,7 @@ function Assert-IsEndUser {
         Raises and exception if current user is not an end user
     #>
     [CmdletBinding()]
-    Param (
+    param (
         # Zendesk Connection Context from `Get-ZendeskConnection`
         [Parameter(Mandatory = $false)]
         [PSTypeName('ZendeskContext')]

@@ -1,4 +1,4 @@
-
+﻿
 function Get-Connection {
     <#
     .SYNOPSIS
@@ -12,7 +12,7 @@ function Get-Connection {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Zendesk subdomain
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]

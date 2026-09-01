@@ -1,4 +1,4 @@
-
+﻿
 function Import-Ticket {
     <#
     .SYNOPSIS
@@ -20,7 +20,7 @@ function Import-Ticket {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Full ticket object to import
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]

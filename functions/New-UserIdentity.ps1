@@ -1,4 +1,4 @@
-
+﻿
 function New-UserIdentity {
     <#
     .SYNOPSIS
@@ -44,7 +44,7 @@ function New-UserIdentity {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High', DefaultParameterSetName = 'Default')]
-    Param (
+    param (
         # The id of the user
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

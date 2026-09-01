@@ -1,4 +1,4 @@
-
+﻿
 function Remove-SuspendedTicket {
     <#
     .SYNOPSIS
@@ -16,7 +16,7 @@ function Remove-SuspendedTicket {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of suspended ticket to retrieve
         [Parameter(Mandatory = $false)]
         [ValidateRange(1, [Int64]::MaxValue)]

@@ -1,4 +1,4 @@
-
+﻿
 function Get-TicketCollaborator {
     <#
     .SYNOPSIS
@@ -16,7 +16,7 @@ function Get-TicketCollaborator {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Unique Id of the ticket to get Collaborators for
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

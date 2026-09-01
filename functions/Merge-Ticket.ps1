@@ -1,4 +1,4 @@
-
+﻿
 function Merge-Ticket {
     <#
     .SYNOPSIS
@@ -20,7 +20,7 @@ function Merge-Ticket {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of the ticket or tickets to merge into target ticket
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

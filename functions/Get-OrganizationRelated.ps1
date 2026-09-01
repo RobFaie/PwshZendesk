@@ -1,4 +1,4 @@
-function Get-OrganizationRelated {
+﻿function Get-OrganizationRelated {
     <#
     .SYNOPSIS
         Gets the number of users and tickets associated with a supplied organization
@@ -14,7 +14,7 @@ function Get-OrganizationRelated {
         Gets the number of users and tickets associated with organization with id 1 with connection context returned by `Get-ZendeskConnection`
     #>
     [CmdletBinding(DefaultParameterSetName = 'default')]
-    Param (
+    param (
         # Unique Id of the group to retrieve
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Id')]

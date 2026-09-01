@@ -12,7 +12,7 @@ function Invoke-CommentRedaction {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of the ticket the comment belongs to
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

@@ -1,4 +1,4 @@
-
+﻿
 function Set-UserIdentityAsVerified {
     <#
     .SYNOPSIS
@@ -12,7 +12,7 @@ function Set-UserIdentityAsVerified {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of the user identity to mark as verified
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

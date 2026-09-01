@@ -1,4 +1,4 @@
-
+﻿
 function Get-User {
     <#
     .SYNOPSIS
@@ -48,7 +48,7 @@ function Get-User {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding(DefaultParameterSetName = 'Default')]
-    Param (
+    param (
         # Unique Id of the user to retrieve
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Id')]

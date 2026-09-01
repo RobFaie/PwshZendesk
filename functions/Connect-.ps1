@@ -12,7 +12,7 @@ function Connect- {
     #>
     [OutputType([Boolean])]
     [CmdletBinding(DefaultParameterSetName='ClientCreds')]
-    Param (
+    param (
         # Zendesk subdomain
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]

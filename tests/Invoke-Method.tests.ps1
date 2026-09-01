@@ -1,5 +1,5 @@
 ﻿[Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingConvertToSecureStringWithPlainText', '')]
-Param()
+param()
 
 Import-Module "$PSScriptRoot/../PwshZendesk.psm1" -Force
 
@@ -12,6 +12,7 @@ Describe 'Invoke-Method' -Tags 'internet' {
         $context = @{
             Organization = 'company'
             BaseUrl      = 'https://company.testdesk.com'
+            AuthType     = 'ApiKey'
             Credential   = [System.Management.Automation.PSCredential]::New("email", ('api-key' | ConvertTo-SecureString -AsPlainText -Force))
         }
         $context | Add-Member -TypeName 'ZendeskContext'
@@ -124,7 +125,7 @@ Describe 'Invoke-Method' -Tags 'internet' {
             Assert-MockCalled Invoke-RestMethod -Exactly 1 -ParameterFilter { $Uri -match '\?name=jim&sort_by' } -Scope It
         }
 
-        Mock -ModuleName PwshZendesk Invoke-RestMethod { & $IRM 'httpstat.us/404' }
+        Mock -ModuleName PwshZendesk Invoke-RestMethod { & $IRM 'codes.httpauth.dev/404' }
 
         It 'Throws on a 404' {
             { Invoke-Method -Context $context -Path '/' } | Should -Throw
@@ -135,14 +136,14 @@ Describe 'Invoke-Method' -Tags 'internet' {
             $E | Should -Match '\(?404\)? \(?Not Found\)?'
         }
 
-        Mock -ModuleName PwshZendesk Invoke-RestMethod { & $IRM 'httpstat.us/400' }
+        Mock -ModuleName PwshZendesk Invoke-RestMethod { & $IRM 'codes.httpauth.dev/400' }
 
         It 'Passes on 400 error message' {
             try { Invoke-Method -Context $context -Path '/' } catch { $E = $_ }
             $E | Should -Match '\(?400\)? \(?Bad Request\)?'
         }
 
-        Mock -ModuleName PwshZendesk Invoke-RestMethod { & $IRM 'httpstat.us/500' }
+        Mock -ModuleName PwshZendesk Invoke-RestMethod { & $IRM 'codes.httpauth.dev/500' }
 
         It 'Passes on 500 error message' {
             try { Invoke-Method -Context $context -Path '/' } catch { $E = $_ }
@@ -191,7 +192,7 @@ Describe 'Invoke-Method' -Tags 'internet' {
         Mock -ModuleName PwshZendesk Invoke-RestMethod {
             $Script:attempts += 1
             if ($Script:attempts -lt 3) {
-                & $IRM 'httpstat.us/429'
+                & $IRM 'codes.httpauth.dev/429'
             }
         }
 

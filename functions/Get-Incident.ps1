@@ -1,4 +1,4 @@
-
+﻿
 function Get-Incident {
     <#
     .SYNOPSIS
@@ -12,7 +12,7 @@ function Get-Incident {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Unique Id of the problem ticket to get linked incidents for
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

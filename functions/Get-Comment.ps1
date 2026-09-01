@@ -16,7 +16,7 @@ function Get-Comment {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding()]
-    Param (
+    param (
         # Unique Id of the ticket to get comments for
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

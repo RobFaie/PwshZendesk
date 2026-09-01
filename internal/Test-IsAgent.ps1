@@ -1,4 +1,4 @@
-function Test-IsAgent {
+﻿function Test-IsAgent {
     <#
     .SYNOPSIS
         Tests if the current user is an agent.
@@ -10,7 +10,7 @@ function Test-IsAgent {
         Returns `$true` if the current user is an agent or `$false` otherwise.
     #>
     [CmdletBinding()]
-    Param (
+    param (
         # Zendesk Connection Context from `Get-ZendeskConnection`
         [Parameter(Mandatory = $false)]
         [PSTypeName('ZendeskContext')]

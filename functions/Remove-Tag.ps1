@@ -20,7 +20,7 @@ function Remove-Tag {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of the ticket to remove tags from
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Ticket')]

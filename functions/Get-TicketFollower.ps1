@@ -1,4 +1,4 @@
-
+﻿
 function Get-TicketFollower {
     <#
     .SYNOPSIS
@@ -12,7 +12,7 @@ function Get-TicketFollower {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Unique Id of the ticket to get followers for
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

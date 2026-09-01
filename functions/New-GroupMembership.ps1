@@ -1,4 +1,4 @@
-
+﻿
 function New-GroupMembership {
     <#
     .SYNOPSIS
@@ -28,7 +28,7 @@ function New-GroupMembership {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
 
         # The id of an agent
         [Parameter(Mandatory = $true,

@@ -1,4 +1,4 @@
-
+﻿
 function New-SharingAgreement {
     <#
     .SYNOPSIS
@@ -12,7 +12,7 @@ function New-SharingAgreement {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Name of this sharing agreement
         [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]

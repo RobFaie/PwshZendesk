@@ -1,4 +1,4 @@
-
+﻿
 function Get-Ticket {
     <#
     .SYNOPSIS
@@ -52,7 +52,7 @@ function Get-Ticket {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding(DefaultParameterSetName = 'Default')]
-    Param (
+    param (
         # Unique Id of the ticket to retrieve
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Id')]

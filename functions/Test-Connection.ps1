@@ -12,9 +12,10 @@ function Test-Connection {
 
         Tests the connection to Zendesk before making a call to `Search-Zendesk`
     #>
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidOverwritingBuiltInCmdlets', '')]
     [OutputType([Boolean])]
     [CmdletBinding()]
-    Param(
+    param(
         # Zendesk Connection Context from `Get-ZendeskConnection`
         [Parameter(Mandatory = $false)]
         [PSTypeName('ZendeskContext')]

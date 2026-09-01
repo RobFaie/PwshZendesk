@@ -1,6 +1,6 @@
-
+﻿
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingConvertToSecureStringWithPlainText', '')]
-Param()
+param()
 
 Import-Module "$PSScriptRoot/../PwshZendesk.psm1" -Force
 
@@ -13,6 +13,7 @@ Describe 'Update-UserIdentity' {
         $context = @{
             Organization = 'company'
             BaseUrl      = 'https://company.testdesk.com'
+            AuthType     = 'ApiKey'
             Credential   = [System.Management.Automation.PSCredential]::New("email", ('api-key' | ConvertTo-SecureString -AsPlainText -Force))
             User         = [PSCustomObject]@{ role = 'admin' }
         }

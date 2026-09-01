@@ -16,7 +16,7 @@ function Search- {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding()]
-    Param (
+    param (
         # Zendesk Search Query
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]

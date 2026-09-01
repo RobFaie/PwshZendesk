@@ -1,4 +1,4 @@
-
+﻿
 function Get-TicketEmailCC {
     <#
     .SYNOPSIS
@@ -16,7 +16,7 @@ function Get-TicketEmailCC {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Unique Id of the ticket to get email ccs for
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

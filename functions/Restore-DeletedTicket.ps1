@@ -1,4 +1,4 @@
-
+﻿
 function Restore-DeletedTicket {
     <#
     .SYNOPSIS
@@ -16,7 +16,7 @@ function Restore-DeletedTicket {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
-    Param (
+    param (
         # Unique Id of soft deleted ticket to restore
         [Parameter(Mandatory = $true)]
         [ValidateRange(1, [Int64]::MaxValue)]

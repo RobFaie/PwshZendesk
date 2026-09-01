@@ -1,4 +1,4 @@
-
+﻿
 function Get-GroupMembership {
     <#
     .SYNOPSIS
@@ -40,7 +40,7 @@ function Get-GroupMembership {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding(DefaultParameterSetName = 'Default')]
-    Param (
+    param (
         # Unique Id of the group membership to retrieve
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Id')]

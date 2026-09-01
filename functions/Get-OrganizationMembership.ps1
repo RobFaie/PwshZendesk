@@ -1,4 +1,4 @@
-
+﻿
 function Get-OrganizationMembership {
     <#
     .SYNOPSIS
@@ -28,7 +28,7 @@ function Get-OrganizationMembership {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding(DefaultParameterSetName = 'Default')]
-    Param (
+    param (
         # Unique Id of the organization membership to retrieve
         [Parameter(Mandatory = $true,
             ParameterSetName = 'Id')]

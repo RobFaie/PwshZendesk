@@ -20,7 +20,7 @@ function Get-JobStatus {
     #>
     [OutputType([PSCustomObject])]
     [CmdletBinding()]
-    Param (
+    param (
         # Unique Id of the background job whose status to retrieve
         [Parameter(Mandatory = $false)]
         [ValidateNotNullOrEmpty()]

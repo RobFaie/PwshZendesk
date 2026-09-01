@@ -1,4 +1,4 @@
-
+﻿
 function Export-Sample {
     <#
     .SYNOPSIS
@@ -24,7 +24,7 @@ function Export-Sample {
     #>
     [OutputType([PSCustomObject])]
     [CMDletBinding()]
-    Param (
+    param (
         # Name of the entity to get a sample export for
         [Parameter(Mandatory = $true)]
         [ValidateSet('tickets', 'users', 'organizations')]
