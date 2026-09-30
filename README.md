@@ -1,6 +1,7 @@
 # PwshZendesk
 
-[![Main Badge Image]][Main Badge Link]
+[![Main Badge Image]][Main Badge Link] [![Check Suite Badge]][Main Badge Link]</br>
+[![Release Badge]][releases] [![PSGallery Badge]][PowerShell Gallery]
 
 PwshZendesk is a Zendesk Support API client for Powershell.
 PwshZendesk supports Powershell versions 5.1, 6, and 7 on all platforms.
@@ -10,29 +11,46 @@ PwshZendesk supports Powershell versions 5.1, 6, and 7 on all platforms.
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
-
-PwshZendesk naturally requires a functioning Powershell environment.
-Official documentation on installing Powershell can be found
-[here.](https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell)
-
-You will also need a Zendesk API Token.
-You can generate an API Token from the admin area of the Support portal.
-Head to Admin => Channels => API and click the `+` under "Token Access"
-
 ### Installing
 
-PwshZendesk supports Powershell versions 5.1, 6, and 7 on all platforms.
+PwshZendesk supports Powershell versions 5.1, and 7 on all platforms.
 
 It is recommended to install PwshZendesk from the [PowerShell Gallery]:
 
 ```Powershell
-Install-Module -Name 'PwshZendesk'
+Install-PSResource -Name PwshZendesk
 ```
 
-PwshZendesk is ready to go after a git clone or by downloading and extracting one of the [releases].
+PwshZendesk is also ready to go after a git clone or by downloading and extracting one of the [releases].
 
 Microsoft has some official documentation on [installing] and [importing] Powershell modules.
+
+### Authentication
+
+#### Api Token
+
+API Tokens are in the process of being phased out by Zendesk.
+Active API tokens will stop working on April 30, 2027.
+
+If API Token creation has not yet been turned off for your Zendesk tenant,
+you can generate one from the Admin Center > Apps and integrations > API tokens.
+API access with API Tokens must also be enabled in the API Configuration.
+
+#### Client Credentials
+
+The Client Credentials auth flow uses a confidential oauth client in your Zendesk instance to authenticate.
+To create one, navigate to the Admin Center > Apps and integrations > OAuth clients.
+When creating your oauth client, be sure to select the confidential client type.
+No redirect urls are required.
+Specifying scopes is also not required,
+but it is recommended that you limit the access your oauth client where possible.
+
+The oauth client will authenticate as the user that creates it,
+so it is important that the user creating the oauth client also has the required permissions.
+
+#### Authorization Flow
+
+WIP
 
 ### Quickstart
 
@@ -58,7 +76,7 @@ PwshZendesk uses Style and Best Practice testing provided by [PSScriptAnalyzer] 
 Ensure you have [PSScriptAnalyzer] installed:
 
 ```Powershell
-Install-Module -Name 'PSScriptAnalyzer' -RequiredVersion '1.19.1'
+Install-PSResource -Name 'PSScriptAnalyzer' -Version '1.25.0'
 ```
 
 And just run it over the `functions`, `internal`, and `tests` directories. The `PSScriptAnalyzerSettings.psd1` will get picked up and run all configured tests.
@@ -73,7 +91,7 @@ Get-ChildItem -Directory | Invoke-ScriptAnalyzer | Format-Table -AutoSize
 Ensure you have [Pester] installed:
 
 ```Powershell
-Install-Module -Name 'Pester' -RequiredVersion '4.10.1'
+Install-PSResource -Name 'Pester' -Version '4.10.1'
 ```
 
 And just run it from the project root in a non-interactive session.
@@ -134,5 +152,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [codes.httpauth.dev]: https://codes.httpauth.dev
 [SemVer]: http://semver.org/
 
+[releases]: https://github.com/RobFaie/PwshZendesk/releases
+
 [Main Badge Link]: https://github.com/RobFaie/PwshZendesk/actions/workflows/main.yml
 [Main Badge Image]: https://github.com/RobFaie/PwshZendesk/actions/workflows/main.yml/badge.svg
+
+[PSGallery Badge]: https://img.shields.io/powershellgallery/v/PwshZendesk
+[Release Badge]: https://img.shields.io/github/v/release/RobFaie/PwshZendesk
+[Check suite Badge]: https://img.shields.io/github/check-suites/RobFaie/PwshZendesk/main
+
+[importing]:https://learn.microsoft.com/en-us/powershell/scripting/developer/module/importing-a-powershell-module?view=powershell-7.6
+[installing]: https://learn.microsoft.com/en-us/powershell/scripting/developer/module/installing-a-powershell-module?view=powershell-7.6
